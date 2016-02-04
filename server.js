@@ -11,14 +11,14 @@ var repostTask = function () {
   });
 }
 
-var okTask = function () {
-  console.log('ok');
+var okTask = function (taskId) {
+  console.log('ok task', taskId);
 };
 
-var okJob = function () {
-  scheduler.runAllTasks([okTask, okTask, okTask], 5000);
+var okJob = function (jobId) {
+  scheduler.runAllTasks(jobId, [okTask, okTask, okTask], 5000);
 };
 
 console.log('Shitposter go!')
 // scheduler.runJob(repostTask);
-scheduler.runJob(okJob, 60000);
+scheduler.runJob(okJob, 8000);

@@ -1,15 +1,16 @@
 var moment = require('moment');
 
-module.exports.taskInterval = 5000;
+var currentJobId = 0;
+var currentTaskId = 0;
 
-var execute = function (fn, callback) {
+var execute = function (id, fn, callback) {
   if (!fn) {
     console.error('Function not specified.');
     return;
   }
 
   try {
-    var result = fn();
+    var result = fn(id);
     if (callback) {
       callback(null, result);
     }
@@ -22,25 +23,25 @@ var execute = function (fn, callback) {
 
 module.exports.runJob = function (fn, intervalMs, callback) {
   // Run now
-  console.log("** Running job **", moment().format('MMMM Do YYYY, h:mm:ss a'));
-  execute(fn, callback);
+  console.log('** Running job ' + currentJobId + ' **', moment().format('MMMM Do YYYY, h:mm:ss a'));
+  execute(currentJobId++, fn, callback);
 
   //Run later, forever, at interval specified by jobInterval
   var timer = setInterval(function () {
-    console.log("** Running job **", moment().format('MMMM Do YYYY, h:mm:ss a'));
-    execute(fn, callback);
+    console.log('** Running job ' + currentJobId + ' **', moment().format('MMMM Do YYYY, h:mm:ss a'));
+    execute(currentJobId++, fn, callback);
   }, intervalMs);
 };
 
-module.exports.runTask = function (fn, callback) {
-  console.log("\t>> Running task **", moment().format('MMMM Do YYYY, h:mm:ss a'));
-  execute(fn, function (error, result) {
+module.exports.runTask = function (jobId, fn, callback) {
+  console.log('\t>> Running task ' + jobId + ':'+ currentTaskId +' **', moment().format('MMMM Do YYYY, h:mm:ss a'));
+  execute(currentTaskId++, fn, function (error, result) {
     callback(error, result);
   });
 };
 
 
-module.exports.runAllTasks = function (tasks, delayMs, callback) {
+module.exports.runAllTasks = function (jobId, tasks, delayMs, callback) {
   if (!tasks || tasks.length === 0) {
     if (callback) {
       callback('No tasks specified');
@@ -53,7 +54,7 @@ module.exports.runAllTasks = function (tasks, delayMs, callback) {
 
   var next = function () {
     var timer = setTimeout(function () {
-      module.exports.runTask(tasks[i], endTaskCallback);
+      module.exports.runTask(jobId, tasks[i], endTaskCallback);
     }, delayMs);
   };
 
@@ -66,5 +67,5 @@ module.exports.runAllTasks = function (tasks, delayMs, callback) {
     }
   };
 
-  module.exports.runTask(tasks[i], endTaskCallback);
+  module.exports.runTask(jobId, tasks[i], endTaskCallback);
 };
