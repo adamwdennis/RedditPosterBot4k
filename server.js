@@ -16,9 +16,9 @@ var okTask = function () {
 };
 
 var okJob = function () {
-  scheduler.runAll([okTask, okTask, okTask]);
+  scheduler.runAllTasks([okTask, okTask, okTask], 5000);
 };
 
 console.log('Shitposter go!')
 // scheduler.runJob(repostTask);
-scheduler.runJob(okJob);
+scheduler.runJob(okJob, 60000);

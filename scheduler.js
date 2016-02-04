@@ -1,6 +1,5 @@
 var moment = require('moment');
 
-module.exports.jobInterval = 60000;
 module.exports.taskInterval = 5000;
 
 var execute = function (fn, callback) {
@@ -21,7 +20,7 @@ var execute = function (fn, callback) {
   }
 };
 
-module.exports.runJob = function (fn, callback) {
+module.exports.runJob = function (fn, intervalMs, callback) {
   // Run now
   console.log("** Running job **", moment().format('MMMM Do YYYY, h:mm:ss a'));
   execute(fn, callback);
@@ -30,7 +29,7 @@ module.exports.runJob = function (fn, callback) {
   var timer = setInterval(function () {
     console.log("** Running job **", moment().format('MMMM Do YYYY, h:mm:ss a'));
     execute(fn, callback);
-  }, module.exports.jobInterval);
+  }, intervalMs);
 };
 
 module.exports.runTask = function (fn, callback) {
@@ -41,7 +40,7 @@ module.exports.runTask = function (fn, callback) {
 };
 
 
-module.exports.runAll = function (tasks, callback) {
+module.exports.runAllTasks = function (tasks, delayMs, callback) {
   if (!tasks || tasks.length === 0) {
     if (callback) {
       callback('No tasks specified');
@@ -55,7 +54,7 @@ module.exports.runAll = function (tasks, callback) {
   var next = function () {
     var timer = setTimeout(function () {
       module.exports.runTask(tasks[i], endTaskCallback);
-    }, module.exports.taskInterval);
+    }, delayMs);
   };
 
   var endTaskCallback = function (error, result) {
