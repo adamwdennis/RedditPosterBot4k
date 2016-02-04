@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/adamwdennis/ShitPoster4000/issues"
   },
-  "homepage": "https://github.com/adamwdennis/ShitPoster4000#readme"
+  "homepage": "https://github.com/adamwdennis/ShitPoster4000#readme",
+  "dependencies": {
+    "imgur-node-api": "^0.1.0"
+  }
 }
