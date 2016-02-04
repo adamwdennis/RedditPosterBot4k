@@ -1,0 +1,24 @@
+{
+  "name": "shitposter4000",
+  "version": "1.0.0",
+  "description": "Reddit karma whoring, robot style",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamwdennis/ShitPoster4000.git"
+  },
+  "keywords": [
+    "karma",
+    "karma",
+    "karma"
+  ],
+  "author": "Evan & Adam",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adamwdennis/ShitPoster4000/issues"
+  },
+  "homepage": "https://github.com/adamwdennis/ShitPoster4000#readme"
+}
