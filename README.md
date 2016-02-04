@@ -12,3 +12,10 @@ Per query Process
 - Run query process for each post obtained
 - Post to reddit with a 30 second delay for each
 - Run again in 15 minutes
+
+requirements:
+
+ brew install graphicsmagick
+ npm install
+
+

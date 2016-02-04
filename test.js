@@ -1,3 +1,4 @@
+var fs = require('fs');
 var CLIENT_ID = "uK9u8Ugo2UPEQQ";
 var CLIENT_SECRET = "DjqfLNlmnyd9l9RBnUrN2-08b18";
 var CLIENT_SECRET2 = "Zn4_NTgLIJ4wcynXrcvXL1jW0oE";
@@ -36,10 +37,21 @@ reddit.passAuth(
                   if (err) throw err;
                   var iden = JSON.parse(res.body)["json"]["data"]["iden"];
 
-                  console.log("get /captcha/" + iden);
+                  console.log("https://www.reddit.com/captcha/" + iden + ".png");
                   reddit.get('/captcha/'+iden, {}, function(err, res, body) {
 
+                    //var btoa = require('btoa');
+                    //console.log(btoa(res.body));
                     console.log(res);
+                    /*
+                    fs.writeFile("/tmp/blah.png", res.body, function(err) {
+                        if(err) {
+                                return console.log(err);
+                            }
+                    
+                        console.log("The file was saved!");
+                    }); 
+                    */
 
                     if (false) {
                       console.log("attempting to submit new post");
