@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/adamwdennis/ShitPoster4000#readme",
   "dependencies": {
-    "imgur-node-api": "^0.1.0"
+    "imgur-node-api": "^0.1.0",
+    "moment": "^2.11.2"
   }
 }
